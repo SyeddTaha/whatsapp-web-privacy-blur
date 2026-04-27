@@ -1,0 +1,15 @@
+/* ============================================================
+   WhatsApp Privacy Blur — blur.css  v2
+   Minimal base styles loaded at document_start.
+   All blur logic is driven by content.js via injected <style>.
+   ============================================================ */
+
+/* Prevent FOUC — hide blur classes until JS runs */
+.wpb-blur {
+  filter: blur(8px);
+  border-radius: 2px;
+  transition: filter 0.18s ease;
+}
+.wpb-blur:hover {
+  filter: blur(0px);
+}

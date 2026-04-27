@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WhatsApp Privacy Blur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+<div class="shell">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="11" r="10" stroke="#00e5a0" stroke-width="1.5"/>
+        <path d="M6 11 Q11 4 16 11 Q11 18 6 11Z" fill="#00e5a0" opacity="0.25"/>
+        <circle cx="11" cy="11" r="3" fill="#00e5a0"/>
+        <line x1="11" y1="1" x2="11" y2="5" stroke="#00e5a0" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="11" y1="17" x2="11" y2="21" stroke="#00e5a0" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span>Privacy Blur</span>
+    </div>
+    <label class="master-toggle" title="Enable / disable all blurring">
+      <input type="checkbox" id="toggle-enabled" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- Blur Targets -->
+  <section class="group" id="blur-targets">
+    <p class="group-label">Blur Targets</p>
+
+    <label class="row" data-key="blurMessages">
+      <span class="row-icon">💬</span>
+      <span class="row-text">
+        <span class="row-title">Chat Messages</span>
+        <span class="row-sub">Text in the active conversation</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+
+    <label class="row" data-key="blurPreviews">
+      <span class="row-icon">📋</span>
+      <span class="row-text">
+        <span class="row-title">Chat Previews</span>
+        <span class="row-sub">Last message in the sidebar list</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+
+    <label class="row" data-key="blurMedia">
+      <span class="row-icon">🖼️</span>
+      <span class="row-text">
+        <span class="row-title">Media Thumbnails</span>
+        <span class="row-sub">Images and videos in chat</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+
+    <label class="row" data-key="blurGallery">
+      <span class="row-icon">🗂️</span>
+      <span class="row-text">
+        <span class="row-title">Media Gallery</span>
+        <span class="row-sub">Lightbox and full-size viewer</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+
+    <label class="row" data-key="blurInput">
+      <span class="row-icon">⌨️</span>
+      <span class="row-text">
+        <span class="row-title">Message Input</span>
+        <span class="row-sub">What you're typing (hover to reveal)</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+
+    <label class="row" data-key="blurNames">
+      <span class="row-icon">👤</span>
+      <span class="row-text">
+        <span class="row-title">Names</span>
+        <span class="row-sub">Contacts and group names</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+
+    <label class="row" data-key="blurAvatars">
+      <span class="row-icon">🧑‍🤝‍🧑</span>
+      <span class="row-text">
+        <span class="row-title">Profile Pictures</span>
+        <span class="row-sub">Avatars everywhere on the page</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Reveal Behaviour -->
+  <section class="group">
+    <p class="group-label">Reveal Behaviour</p>
+
+    <label class="row" data-key="noTransition">
+      <span class="row-icon">⚡</span>
+      <span class="row-text">
+        <span class="row-title">Instant Reveal</span>
+        <span class="row-sub">No fade — snappier hover unblur</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+
+    <label class="row" data-key="revealOnAppHover">
+      <span class="row-icon">👁️</span>
+      <span class="row-text">
+        <span class="row-title">Hover App to Reveal All</span>
+        <span class="row-sub">Mouse over page → everything unblurs</span>
+      </span>
+      <input type="checkbox" />
+      <span class="track"><span class="knob"></span></span>
+    </label>
+  </section>
+
+  <div class="divider"></div>
+
+  <footer>
+    <span id="status-line">Hover any blurred element to reveal it</span>
+  </footer>
+
+</div>
+<script src="popup.js"></script>
+</body>
+</html>
