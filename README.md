@@ -4,6 +4,9 @@ A Chrome extension that blurs WhatsApp Web. Hover anything to read it. Toggle ca
 
 Built for the person who shares their screen in meetings, works in public, or just doesn't want their chat history visible to whoever walks past.
 
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/1538b5af-0509-4e2e-af59-ff7bf540f332" />
+
+
 ---
 
 ## What it blurs
