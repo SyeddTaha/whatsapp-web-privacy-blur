@@ -4,8 +4,8 @@ A Chrome extension that blurs WhatsApp Web. Hover anything to read it. Toggle ca
 
 Built for the person who shares their screen in meetings, works in public, or just doesn't want their chat history visible to whoever walks past.
 
-<img width="250" alt="image" src="https://github.com/user-attachments/assets/1538b5af-0509-4e2e-af59-ff7bf540f332" />
-
+[<img width="1891" height="897" alt="image" src="https://github.com/user-attachments/assets/8c9681fd-ff09-4537-8c25-b1ea16de382d" />
+](https://syeddtaha.github.io/whatsapp-web-privacy-blur/)
 
 ---
 
@@ -48,6 +48,8 @@ When this is on, moving your mouse anywhere over the WhatsApp Web tab unblurs ev
 ---
 
 ## The popup
+
+<img width="250" alt="image" src="https://github.com/user-attachments/assets/1538b5af-0509-4e2e-af59-ff7bf540f332" />
 
 One master toggle at the top to turn the whole extension on or off. Below it, two sections:
 
