@@ -107,7 +107,3 @@ whatsapp-privacy-blur/
 No data collection. No network requests from the extension. No analytics. All settings live in `chrome.storage.sync`, which is local to your browser (and optionally synced by Chrome across your own signed-in devices). The extension never reads message content — it only applies CSS filters to DOM elements.
 
 ---
-
-by Taha Jaffri
-
-Follow @tahajaffriii for more techniques
