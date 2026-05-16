@@ -1,6 +1,11 @@
 # WhatsApp Privacy Blur
 
-A Chrome extension that blurs WhatsApp Web. Hover anything to read it. Toggle categories on or off from the popup. Nothing leaves your browser.
+A Chrome extension that blurs WhatsApp Web for shoulder-surfing privacy.
+
+- Fine-grained blur categories
+- Adjustable blur amount slider
+- Fast reveal modes
+- Local-only behavior (no analytics, no data export)
 
 Built for the person who shares their screen in meetings, works in public, or just doesn't want their chat history visible to whoever walks past.
 
@@ -15,22 +20,32 @@ Built for the person who shares their screen in meetings, works in public, or ju
 Every message bubble in the open conversation is blurred — incoming and outgoing. This targets the whole bubble row rather than the inner text node, which matters because WhatsApp's layout clips anything blurred at the span level. Hover the bubble to read it.
 
 ### Chat List Previews
-The last message snippet shown under each contact name in the sidebar. If someone texts you something you'd rather not flash on screen, this hides it until you choose to look.
+In the sidebar, preview blur targets message preview content and timestamps while keeping the contact title separate when name blur is off.
 
 ### Media Thumbnails
-Images, videos, stickers, audio players, document previews, and link thumbnails inside chat bubbles — blurred separately from text. You can have messages visible but media still hidden, or vice versa.
+Targets image/video thumbnail surfaces in chat, without blurring message text content such as inline text or reactions.
 
 ### Media Gallery
 The full-screen media viewer and lightbox. When you click a photo to expand it, it opens blurred. Hover to see it.
 
 ### Message Input
-What you type in the compose box is blurred at rest. The field reveals automatically when you click into it or hover over it, so you can type normally. The blur returns when focus leaves.
+What you type in the compose box is blurred. Blur strength follows your slider setting (with a lighter input-specific value).
 
 ### Contact and Group Names
-Contact names in the sidebar list, the open chat header, group member names inside messages, and name fields in the contact/group info drawer. Uses `span[title]` attributes as the selector anchor — these have been stable in WhatsApp Web's DOM for years.
+Contact names in sidebar rows, the open chat header title, group author names inside messages, and contact/group info drawers.
 
 ### Profile Pictures
-Avatars in the sidebar, the open chat header, and inside message threads. The extension scans for small square images (roughly 28–82px) and tags their clip containers too, so the blur covers the full circle rather than leaking outside it.
+Avatars in list rows, chat headers, and group/community identity areas. Runtime avatar tagging avoids over-blurring media/reaction images, and keeps original avatar border radius/corner shape intact.
+
+---
+
+## Blur Amount Slider
+
+You can control blur intensity from the popup (`0` to `20`).
+
+- `0` = effectively no blur
+- higher values = stronger blur
+- input blur uses a lighter derived value so the composer remains usable
 
 ---
 
@@ -49,29 +64,29 @@ When this is on, moving your mouse anywhere over the WhatsApp Web tab unblurs ev
 
 ## The popup
 
-<img width="250" alt="image" src="https://github.com/user-attachments/assets/1538b5af-0509-4e2e-af59-ff7bf540f332" />
+The popup is a compact modern black/white panel with:
 
-One master toggle at the top to turn the whole extension on or off. Below it, two sections:
+- Master enable/disable toggle
+- Blur Targets section (per-category toggles)
+- Blur Strength section (slider)
+- Reveal Behaviour section
+- Live status line
 
-**Blur Targets** — seven individual toggles, one per category. Turn off the things you don't need. Settings are saved to `chrome.storage.sync` so they persist across sessions and sync across Chrome profiles.
-
-**Reveal Behaviour** — Instant Reveal and Hover App to Reveal All as separate toggles.
-
-The status line at the bottom updates to show how many blur categories are active and which reveal mode is running.
+Settings are saved to `chrome.storage.sync` and applied immediately to active WhatsApp tabs.
 
 ---
 
 ## How it works
 
-The extension injects a `<style>` tag into WhatsApp Web's `<head>` and rebuilds it whenever settings change. No per-element style attribute manipulation — everything runs through CSS classes.
+The extension injects one `<style>` tag into WhatsApp Web and rebuilds it whenever settings change. No per-element inline style mutation.
 
 **Message blur specifically:** Early versions tried to blur inner `<span>` text nodes. That doesn't work. WhatsApp's parent divs use `overflow: hidden`, which clips the blur glow at the container edge, making it look like nothing happened. The fix is blurring the entire `.message-in` / `.message-out` row elements. Those class names aren't obfuscated — WhatsApp has kept them stable and they're used by every WA automation library.
 
-**Avatar blur:** Avatars use blob URLs that would match too broadly with a simple `img[src^="blob:"]` selector. Instead a `MutationObserver` runs a lightweight scan after each DOM change, tags small square images with `.wpb-av`, and CSS targets that class. The scan is debounced to 200ms so it doesn't hammer performance as messages stream in.
+**Avatar blur:** A debounced `MutationObserver` scans candidate images, excludes message/reaction/quoted containers, and tags avatar-like images with `.wpb-av` for CSS targeting.
 
 **Style self-healing:** A second `MutationObserver` watches `<head>`. If WhatsApp's own rendering removes the injected style tag, it gets re-injected immediately.
 
-**Selectors used:** `data-testid` attributes where they exist (WA keeps these stable for their own E2E tests), `span[title]` for contact names, `.message-in` / `.message-out` for message rows, and `[role="listitem"]` structural selectors as fallbacks.
+**Selectors used:** Stable `data-testid` selectors where available, `.message-in` / `.message-out` for message rows, and selective structural fallbacks.
 
 ---
 
@@ -95,10 +110,12 @@ Works on Chrome, Edge, Brave, and any Chromium-based browser that supports Manif
 whatsapp-privacy-blur/
 ├── manifest.json       Manifest V3 — scoped to web.whatsapp.com
 ├── content.js          CSS builder + MutationObserver + avatar scanner
-├── blur.css            Base blur class loaded at document_start (prevents flash)
-├── popup.html          Extension popup UI
-├── popup.css           Popup styles (dark, monospace)
+├── blur.css            Minimal base content CSS
+├── popup.html          Popup UI markup
+├── popup.css           Popup styles (modern minimal monochrome)
 ├── popup.js            Settings persistence via chrome.storage.sync
+├── index.html          Project landing page
+├── style.css           Landing page styles
 └── icons/
     ├── icon16.png
     ├── icon48.png

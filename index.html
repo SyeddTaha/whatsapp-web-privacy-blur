@@ -3,343 +3,127 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>WhatsApp Privacy Blur — by Taha Jaffri</title>
+<title>WhatsApp Privacy Blur</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@700;800;900&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/svg+xml" href="icons/icon48.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" type="image/png" href="icons/icon48.png" />
 </head>
 <body>
-
-<div class="grid-bg"></div>
-<div class="ambient"></div>
-
-<div class="page">
-
-  <!-- Nav -->
-  <nav>
-    <div class="nav-logo">
-      <svg class="eye-icon" viewBox="0 0 22 22" fill="none">
-        <circle cx="11" cy="11" r="10" stroke="#00e5a0" stroke-width="1.4"/>
-        <path d="M4 11 Q11 3 18 11 Q11 19 4 11Z" fill="#00e5a0" opacity="0.15"/>
-        <circle cx="11" cy="11" r="3.5" fill="#00e5a0"/>
-        <circle cx="11" cy="11" r="1.2" fill="#080a0b"/>
-      </svg>
-      Privacy Blur
-    </div>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#install">Install</a>
-      <a href="#how-it-works">How it works</a>
-      <a href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank">GitHub ↗</a>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero fade-up">
-    <div class="hero-kicker">Chrome Extension · Free · Open Source</div>
-    <h1>
-      Your chats.<br>
-      <span class="acc">Blurred</span> by default<span class="cursor"></span>
-    </h1>
-    <p class="hero-sub">
-      A browser extension that hides everything on WhatsApp Web until you choose to look.
-      Messages, names, profile pictures, media, and what you're typing — all blurred at rest, revealed on hover.
-    </p>
-    <div class="cta-row">
-      <a class="btn-primary" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur/archive/refs/heads/main.zip">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm-.75 11.25l4-4-1.06-1.06-2.19 2.19V3.5h-1.5v4.88L4.31 6.19 3.25 7.25l4 4 .5.5.5-.5z"/></svg>
-        Download ZIP
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Privacy Blur</span>
       </a>
-      <a class="btn-secondary" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank">
-        View on GitHub →
-      </a>
-    </div>
-  </section>
+      <nav class="top-links">
+        <a href="#features">Features</a>
+        <a href="#install">Install</a>
+        <a href="#details">Details</a>
+        <a href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </header>
 
-  <!-- Live Demo -->
-  <div class="demo-strip fade-up">
-    <div class="demo-header">
-      <div class="demo-dot"></div>
-      <div class="demo-dot"></div>
-      <div class="demo-dot"></div>
-      <span class="demo-title">web.whatsapp.com — Privacy Blur active</span>
-    </div>
-    <div class="demo-body">
-      <!-- Sidebar -->
-      <div class="demo-sidebar">
-        <div class="demo-chat-row">
-          <div class="demo-avatar demo-av-1"></div>
-          <div class="demo-chat-info">
-            <div class="demo-chat-name">Ali Raza</div>
-            <div class="demo-chat-preview">you: bro don’t open this in public 💀</div>
+    <section class="hero reveal">
+      <p class="kicker">Chrome Extension</p>
+      <h1>Private Screen. Public Safe.</h1>
+      <p class="hero-copy">
+        Blur messages, names, media, and avatars on WhatsApp Web until you intentionally reveal them.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur/archive/refs/heads/main.zip">Download ZIP</a>
+        <a class="btn btn-ghost" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank" rel="noreferrer">Open GitHub</a>
+      </div>
+    </section>
+
+    <section class="demo reveal">
+      <div class="demo-head">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <p>Preview</p>
+      </div>
+      <div class="demo-grid">
+        <div class="demo-list">
+          <div class="chat-row">
+            <span class="avatar blur"></span>
+            <div>
+              <p class="name blur">Project Group</p>
+              <p class="preview blur">Deadline moved to 8 PM</p>
+            </div>
+          </div>
+          <div class="chat-row">
+            <span class="avatar blur"></span>
+            <div>
+              <p class="name blur">Ammi</p>
+              <p class="preview blur">Call me when free</p>
+            </div>
+          </div>
+          <div class="chat-row">
+            <span class="avatar blur"></span>
+            <div>
+              <p class="name blur">Ali</p>
+              <p class="preview blur">See you outside</p>
+            </div>
           </div>
         </div>
-      
-        <div class="demo-chat-row">
-          <div class="demo-avatar demo-av-2"></div>
-          <div class="demo-chat-info">
-            <div class="demo-chat-name">Ammi ❤️</div>
-            <div class="demo-chat-preview">beta call me when free</div>
-          </div>
-        </div>
-      
-        <div class="demo-chat-row">
-          <div class="demo-avatar demo-av-3"></div>
-          <div class="demo-chat-info">
-            <div class="demo-chat-name">Project Group</div>
-            <div class="demo-chat-preview">Ahmed: deadline kal hai??</div>
-          </div>
-        </div>
-      
-        <div class="demo-chat-row">
-          <div class="demo-avatar demo-av-4"></div>
-          <div class="demo-chat-info">
-            <div class="demo-chat-name">Unknown Number</div>
-            <div class="demo-chat-preview">hey… are you coming today?</div>
-          </div>
-        </div>
-      
-        <div class="demo-chat-row">
-          <div class="demo-avatar demo-av-5"></div>
-          <div class="demo-chat-info">
-            <div class="demo-chat-name">Bilal Gaming</div>
-            <div class="demo-chat-preview">Photo · last night match highlights</div>
-          </div>
+        <div class="demo-chat">
+          <p class="bubble in blur">Can you share the updated file?</p>
+          <p class="bubble out blur">Sending now.</p>
+          <p class="bubble in blur">Perfect, thanks.</p>
         </div>
       </div>
-      <!-- Messages -->
-      <div class="demo-messages">
-        <div class="demo-msg demo-msg-in">hey are you coming tonight? the plan changed a bit</div>
-        <div class="demo-msg demo-msg-out">yeah still on, what changed?</div>
-        <div class="demo-msg demo-msg-in">we're meeting at 8 instead, new place downtown — i'll send the address</div>
-        <div class="demo-msg demo-msg-out">perfect, see you there</div>
+    </section>
+
+    <section class="section reveal" id="features">
+      <p class="kicker">Core Features</p>
+      <h2>Blur Exactly What You Need</h2>
+      <div class="feature-grid">
+        <article class="card"><h3>Messages</h3><p>Incoming and outgoing message bubbles.</p></article>
+        <article class="card"><h3>Previews</h3><p>Sidebar timestamps and preview message text.</p></article>
+        <article class="card"><h3>Media</h3><p>Image and video thumbnails inside chat.</p></article>
+        <article class="card"><h3>Names</h3><p>Contact and group titles in list and header.</p></article>
+        <article class="card"><h3>Avatars</h3><p>Profile photos across list, headers, and group identity.</p></article>
+        <article class="card"><h3>Input</h3><p>Composer content with custom blur amount.</p></article>
       </div>
-    </div>
-    <div class="demo-hint">↑ hover any row or message to reveal it</div>
+    </section>
+
+    <section class="section reveal" id="install">
+      <p class="kicker">Install</p>
+      <h2>Set Up In One Minute</h2>
+      <ol class="steps">
+        <li>Download and unzip the project folder.</li>
+        <li>Open <code>chrome://extensions</code> and enable Developer mode.</li>
+        <li>Click Load unpacked and select this folder.</li>
+        <li>Open <a href="https://web.whatsapp.com" target="_blank" rel="noreferrer">web.whatsapp.com</a> and use the toolbar popup.</li>
+      </ol>
+    </section>
+
+    <section class="section reveal" id="details">
+      <p class="kicker">Privacy</p>
+      <h2>Local, Lightweight, No Tracking</h2>
+      <div class="details card">
+        <p>No analytics, no external API calls, and no message export.</p>
+        <p>Settings are saved in <code>chrome.storage.sync</code>.</p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>Built by Taha Jaffri · MIT License</p>
+    </footer>
   </div>
 
-  <div class="accent-line"></div>
+  <script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
 
-  <!-- Features -->
-  <section class="section fade-up" id="features">
-    <div class="section-kicker">What gets blurred</div>
-    <h2>Seven independent<br>blur targets</h2>
-    <p class="section-desc">Toggle each category separately. Blur only what matters for your situation.</p>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <span class="feature-icon">💬</span>
-        <div class="feature-title">Chat Messages</div>
-        <div class="feature-desc">Every bubble in the open conversation — incoming and outgoing. Hover the bubble to read it.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">📋</span>
-        <div class="feature-title">Chat Previews</div>
-        <div class="feature-desc">The last message snippet shown under each contact name in the sidebar. Hidden until you hover the row.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🖼️</span>
-        <div class="feature-title">Media Thumbnails</div>
-        <div class="feature-desc">Images, videos, stickers, audio players, and document previews inside chat. Toggled separately from text.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🗂️</span>
-        <div class="feature-title">Media Gallery</div>
-        <div class="feature-desc">The full-screen lightbox viewer. Opens blurred whenever you click a photo to expand it.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">⌨️</span>
-        <div class="feature-title">Message Input</div>
-        <div class="feature-desc">What you're typing in the compose box is blurred at rest. Auto-reveals when you click into it or hover.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">👤</span>
-        <div class="feature-title">Names</div>
-        <div class="feature-desc">Contact and group names in the sidebar, the chat header, and inside group messages.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">🧑‍🤝‍🧑</span>
-        <div class="feature-title">Profile Pictures</div>
-        <div class="feature-desc">Avatars everywhere — sidebar, chat header, and message threads. Blur covers the full circle.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Reveal modes -->
-  <section class="section fade-up" id="reveal-modes">
-    <div class="section-kicker">Reveal behaviour</div>
-    <h2>Three ways to<br>unblur</h2>
-    <p class="section-desc">Choose how content reveals when you need to see it.</p>
-
-    <div class="modes-grid">
-      <div class="mode-card">
-        <div class="mode-badge">Default</div>
-        <div class="mode-title">Hover to reveal</div>
-        <div class="mode-desc">Move your mouse over any blurred element to see it. Move away and it blurs again. Everything else on the page stays hidden.</div>
-      </div>
-      <div class="mode-card">
-        <div class="mode-badge">Option</div>
-        <div class="mode-title">Instant reveal</div>
-        <div class="mode-desc">Turns off the 180ms fade transition. The unblur is immediate on hover — no animation, snappier feel if the transition bothers you.</div>
-      </div>
-      <div class="mode-card" style="grid-column: 1 / -1;">
-        <div class="mode-badge">Option</div>
-        <div class="mode-title">Hover app to reveal all</div>
-        <div class="mode-desc">When this is on, moving your mouse anywhere over the WhatsApp Web tab unblurs everything at once. Useful when you want to read normally for a stretch without hovering item by item. Move your mouse off the browser window and everything blurs again.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Install guide -->
-  <section class="section fade-up" id="install">
-    <div class="section-kicker">Installation</div>
-    <h2>Up in about<br>60 seconds</h2>
-    <p class="section-desc">No Chrome Web Store account needed. Load it directly as an unpacked extension.</p>
-
-    <div class="install-steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <div class="step-title">Download the ZIP</div>
-          <div class="step-detail">
-            Click the download button above or grab it directly from
-            <a href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur/archive/refs/heads/main.zip">GitHub</a>.
-            Unzip it anywhere — your Downloads folder is fine.
-          </div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <div class="step-title">Open Extensions</div>
-          <div class="step-detail">
-            In Chrome, Edge, or Brave go to <code>chrome://extensions</code> in the address bar.
-            In Edge it's <code>edge://extensions</code>.
-          </div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <div class="step-title">Enable Developer Mode</div>
-          <div class="step-detail">
-            Toggle the <strong>Developer mode</strong> switch in the top-right corner of the extensions page. This lets you load extensions from local files.
-          </div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <div class="step-title">Load Unpacked</div>
-          <div class="step-detail">
-            Click <strong>Load unpacked</strong>, then select the unzipped folder
-            (<code>whatsapp-web-privacy-blur-main/</code>). Don't select the ZIP — select the folder inside it.
-          </div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-body">
-          <div class="step-title">Open WhatsApp Web</div>
-          <div class="step-detail">
-            Go to <a href="https://web.whatsapp.com" target="_blank">web.whatsapp.com</a>. Blur is active immediately.
-            If you had it open already, do a hard refresh (<code>Ctrl+Shift+R</code> / <code>Cmd+Shift+R</code>).
-          </div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">6</div>
-        <div class="step-body">
-          <div class="step-title">Configure from the popup</div>
-          <div class="step-detail">
-            Click the extension icon in your toolbar to open the control panel.
-            Toggle individual blur categories and reveal behaviour to match your needs.
-            Settings save automatically.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="section fade-up" id="how-it-works">
-    <div class="section-kicker">Under the hood</div>
-    <h2>How it actually<br>works</h2>
-    <p class="section-desc">No magic. Just CSS, a MutationObserver, and one insight that makes message blur work correctly.</p>
-
-    <div class="tech-grid">
-      <div class="tech-card">
-        <div class="tech-label">Message blur</div>
-        <div class="tech-heading">Blur the row, not the span</div>
-        <div class="tech-body">
-          WhatsApp's parent divs use <code>overflow:hidden</code>. Blurring inner text spans clips the glow at the container edge — nothing looks blurred. The fix: blur the whole <code>.message-in</code> / <code>.message-out</code> row. These class names are stable and not obfuscated.
-        </div>
-      </div>
-      <div class="tech-card">
-        <div class="tech-label">CSS injection</div>
-        <div class="tech-heading">One &lt;style&gt; tag, rebuilt on change</div>
-        <div class="tech-body">
-          A single <code>&lt;style&gt;</code> tag is injected into WhatsApp's <code>&lt;head&gt;</code> and regenerated whenever settings change. No per-element style attribute pollution. A second MutationObserver watches <code>&lt;head&gt;</code> and re-injects it if WhatsApp removes it.
-        </div>
-      </div>
-      <div class="tech-card">
-        <div class="tech-label">Avatar detection</div>
-        <div class="tech-heading">Structural scan, not URL matching</div>
-        <div class="tech-body">
-          Avatars share blob URLs with media, so <code>img[src^="blob:"]</code> would catch everything. Instead a debounced MutationObserver scans for small square images (28–82px) and tags them with <code>.wpb-av</code>. CSS targets that class.
-        </div>
-      </div>
-      <div class="tech-card">
-        <div class="tech-label">Selector strategy</div>
-        <div class="tech-heading">data-testid over class names</div>
-        <div class="tech-body">
-          WhatsApp rotates its CSS class names with every deploy. <code>data-testid</code> attributes stay stable — they use them for their own E2E tests. Names use <code>span[title]</code> anchors which have been reliable for years.
-        </div>
-      </div>
-    </div>
-
-    <div class="privacy-box">
-      <div class="privacy-icon">🔒</div>
-      <div class="privacy-body">
-        <h3>Completely private by design</h3>
-        <p>
-          The extension never reads your message content. It only applies CSS filters to DOM elements.
-          No data leaves your browser. No analytics, no tracking, no network requests.
-          All settings live in <code>chrome.storage.sync</code> — local to your browser, optionally synced across your own Chrome profile.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-left">
-      Built by <strong>Taha Jaffri</strong> · MIT License
-    </div>
-    <div class="footer-right">
-      <a href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank">github.com/SyeddTaha</a>
-  </footer>
-
-</div><!-- .page -->
-
-<script>
-// Scroll-triggered fade-up animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      observer.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-// Stagger feature cards
-document.querySelectorAll('.feature-card').forEach((card, i) => {
-  card.style.transitionDelay = `${i * 40}ms`;
-});
-</script>
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>

@@ -4,6 +4,7 @@
 
 const DEFAULTS = {
   enabled: true,
+  blurAmount: 8,
   blurMessages: true,
   blurPreviews: true,
   blurMedia: true,
@@ -18,6 +19,8 @@ const DEFAULTS = {
 const shell = document.querySelector('.shell');
 const masterToggle = document.getElementById('toggle-enabled');
 const statusLine = document.getElementById('status-line');
+const blurAmountInput = document.getElementById('blur-amount');
+const blurAmountValue = document.getElementById('blur-amount-value');
 const rows = document.querySelectorAll('.row[data-key]');
 
 /* Load settings and render UI */
@@ -26,6 +29,13 @@ chrome.storage.sync.get(DEFAULTS, (stored) => {
 
   masterToggle.checked = s.enabled;
   setDisabledState(!s.enabled);
+
+  if (blurAmountInput) {
+    blurAmountInput.value = String(s.blurAmount);
+  }
+  if (blurAmountValue) {
+    blurAmountValue.textContent = `${s.blurAmount}px`;
+  }
 
   rows.forEach(row => {
     const key = row.dataset.key;
@@ -45,6 +55,14 @@ masterToggle.addEventListener('change', () => {
   save({ enabled });
   updateStatusFromStorage();
 });
+
+if (blurAmountInput && blurAmountValue) {
+  blurAmountInput.addEventListener('input', () => {
+    const blurAmount = Number(blurAmountInput.value);
+    blurAmountValue.textContent = `${blurAmount}px`;
+    save({ blurAmount });
+  });
+}
 
 /* Individual row toggles */
 rows.forEach(row => {

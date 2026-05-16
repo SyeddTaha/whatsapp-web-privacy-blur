@@ -22,6 +22,7 @@
 
   const DEFAULTS = {
     enabled:          true,
+    blurAmount:       8,
     blurMessages:     true,
     blurPreviews:     true,
     blurMedia:        true,
@@ -44,8 +45,14 @@
   function buildCSS() {
     if (!S.enabled) return '';
 
-    const BLR  = 'filter:blur(8px)!important;border-radius:4px;';
-    const BLR4 = 'filter:blur(4px)!important;border-radius:4px;';
+    const blurAmount = Number.isFinite(Number(S.blurAmount))
+      ? Math.min(20, Math.max(0, Number(S.blurAmount)))
+      : DEFAULTS.blurAmount;
+    const inputBlurAmount = blurAmount === 0 ? 0 : Math.max(1, Math.round(blurAmount / 2));
+
+    const BLR  = `filter:blur(${blurAmount}px)!important;border-radius:4px;`;
+    const BLR_NO_RADIUS = `filter:blur(${blurAmount}px)!important;`;
+    const BLR4 = `filter:blur(${inputBlurAmount}px)!important;border-radius:4px;`;
     const CLR  = 'filter:blur(0)!important;';
     const T    = S.noTransition ? '' : 'transition:filter .18s ease!important;';
     const TF   = S.noTransition ? '' : 'transition:filter .15s ease!important;';
@@ -74,9 +81,12 @@
     }
 
     /* ── 2. SIDEBAR CHAT PREVIEWS ───────────────────────────── */
-    // Blur the secondary line (last message) inside each row.
+    // Blur the timestamp and last-message text, but leave the contact name alone.
     if (S.blurPreviews) {
       css += rule('[data-testid="cell-frame-primary-detail"]');
+      css += rule('[data-testid="cell-frame-secondary"] [data-testid="last-msg-status"] > span:first-child');
+      css += rule('[data-testid="cell-frame-secondary"] [data-testid="last-msg-status"] > span[dir="ltr"]');
+      css += rule('[data-testid="cell-frame-secondary"] [data-testid="last-msg-status"] > span:last-child');
     }
 
     /* ── 3. MEDIA THUMBNAILS (in-chat) ──────────────────────── */
@@ -84,13 +94,6 @@
       [
         '[data-testid="image-thumb"]',
         '[data-testid="video-thumb"]',
-        '[data-testid="sticker-img"]',
-        '[data-testid="audio-player"]',
-        '[data-testid="document-thumb"]',
-        '[data-testid="msg-container"] img',
-        '[data-testid="msg-container"] [data-testid="link-preview"]',
-        '.message-in img',
-        '.message-out img',
       ].forEach(sel => { css += rule(sel); });
     }
 
@@ -110,11 +113,13 @@
     if (S.blurInput) {
       [
         'footer [contenteditable="true"]',
+        '[data-testid="conversation-compose-box-input"]',
         '[data-testid="conversation-compose-box"] [contenteditable="true"]',
         '.copyable-area footer [contenteditable]',
       ].forEach(sel => {
         css += `${sel}{${BLR4}${TF}}\n`;
-        css += `${sel}:focus,${sel}:hover{${CLR}}\n`;
+        css += `${sel}:hover{${CLR}}\n`;
+        css += `${sel}:focus,${sel}:focus-within{${BLR4}${TF}}\n`;
         if (rev) css += `${rev}${sel}{${CLR}}\n`;
       });
     }
@@ -122,12 +127,9 @@
     /* ── 6. CONTACT / GROUP NAMES ───────────────────────────── */
     if (S.blurNames) {
       [
-        // Sidebar list — each row's title
-        '[data-testid="cell-frame-title"]',
-        '[data-testid="cell-frame-title"] span',
-        // Open chat header
-        'header [data-testid="conversation-info-header-chat-title"]',
-        'header [data-testid="conversation-info-header-chat-title"] span',
+        // Sidebar list and open chat header — only the actual name text
+        '[data-testid="cell-frame-title"] span[title]',
+        '[data-testid="conversation-info-header-chat-title"]',
         // In-message author name (group chats)
         '[data-testid="msg-container"] [data-testid="author"]',
         // Contact / group info drawers
@@ -141,22 +143,14 @@
     /* ── 7. PROFILE PICTURES / AVATARS ──────────────────────── */
     if (S.blurAvatars) {
       [
-        // data-testid
         '[data-testid="avatar"]',
         '[data-testid="avatar"] img',
         '[data-testid="default-user"]',
         '[data-testid="photo"] img',
-        // Header
-        'header [data-testid="avatar"]',
-        'header img',
-        // Sidebar list rows
-        '[role="listitem"] [data-testid="avatar"]',
-        '[role="listitem"] img',
-        '[role="row"] img',
-        // JS-tagged avatars (.wpb-av added by scanAvatars())
+        '[data-testid="subgroup-identity"] img',
         'img.wpb-av',
         '.wpb-av',
-      ].forEach(sel => { css += rule(sel); });
+      ].forEach(sel => { css += rule(sel, BLR_NO_RADIUS); });
     }
 
     return css;
@@ -197,8 +191,11 @@
       return;
     }
     document.querySelectorAll('img').forEach(img => {
+      if (img.closest('[data-testid="msg-container"], [data-testid="reaction-bubble"], [data-testid="quoted-message"], [data-testid="cell-frame-secondary"]')) {
+        return;
+      }
       const r = img.getBoundingClientRect();
-      if (r.width < 28 || r.width > 82 || r.height < 28 || r.height > 82) return;
+      if (r.width < 28 || r.width > 180 || r.height < 28 || r.height > 180) return;
       if (Math.abs(r.width - r.height) > 8) return;
       img.classList.add('wpb-av');
       const p = img.parentElement;
