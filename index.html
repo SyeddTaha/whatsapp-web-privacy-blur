@@ -1,119 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>WhatsApp Privacy Blur</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css" />
-<link rel="icon" type="image/png" href="icons/icon48.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Blur — Protect Your WhatsApp on Screen</title>
+  <meta name="description" content="A Chrome extension that blurs messages, names, avatars and media on WhatsApp Web until you intentionally reveal them. Free, local, no tracking." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="icons/icon48.png" />
 </head>
 <body>
-  <div class="page">
-    <header class="topbar">
-      <a class="brand" href="#">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>Privacy Blur</span>
-      </a>
-      <nav class="top-links">
-        <a href="#features">Features</a>
-        <a href="#install">Install</a>
-        <a href="#details">Details</a>
-        <a href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank" rel="noreferrer">GitHub</a>
-      </nav>
-    </header>
 
-    <section class="hero reveal">
-      <p class="kicker">Chrome Extension</p>
-      <h1>Private Screen. Public Safe.</h1>
+<div class="page">
+
+  <!-- ── Topbar ───────────────────────────────────────────────── -->
+  <header class="topbar">
+    <a class="brand" href="#" id="brand-logo">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Privacy Blur</span>
+    </a>
+    <nav class="top-links" aria-label="Primary navigation">
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#privacy">Privacy</a>
+      <a href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank" rel="noreferrer">GitHub</a>
+    </nav>
+    <a id="nav-cta-btn" class="nav-cta" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur/archive/refs/heads/main.zip">
+      Download <span class="arrow">↗</span>
+    </a>
+  </header>
+
+  <!-- ── Hero ─────────────────────────────────────────────────── -->
+  <section class="hero reveal" id="hero">
+    <!-- Left column -->
+    <div class="hero-left">
+      <p class="kicker">Chrome Extension · Free &amp; Open Source</p>
+      <h1>
+        Protect Your<br />
+        <span class="accent">Digital</span> Privacy
+      </h1>
       <p class="hero-copy">
-        Blur messages, names, media, and avatars on WhatsApp Web until you intentionally reveal them.
+        Blur messages, names, media and avatars on WhatsApp Web until you intentionally reveal them. Browse safely in public.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-solid" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur/archive/refs/heads/main.zip">Download ZIP</a>
-        <a class="btn btn-ghost" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank" rel="noreferrer">Open GitHub</a>
+        <a id="hero-download-btn" class="btn btn-solid" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur/archive/refs/heads/main.zip">
+          Download ZIP <span class="arrow">→</span>
+        </a>
+        <a id="hero-github-btn" class="btn btn-ghost" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank" rel="noreferrer">
+          Open GitHub
+        </a>
       </div>
-    </section>
+    </div>
 
-    <section class="demo reveal">
-      <div class="demo-head">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <p>Preview</p>
+    <!-- Right column -->
+    <div class="hero-right">
+      <!-- Stat card -->
+      <div class="stat-card">
+        <div class="stat-number">6+</div>
+        <div class="stat-label">Blur targets — messages, names, avatars, media, previews &amp; input</div>
       </div>
-      <div class="demo-grid">
-        <div class="demo-list">
-          <div class="chat-row">
-            <span class="avatar blur"></span>
-            <div>
-              <p class="name blur">Project Group</p>
-              <p class="preview blur">Deadline moved to 8 PM</p>
-            </div>
-          </div>
-          <div class="chat-row">
-            <span class="avatar blur"></span>
-            <div>
-              <p class="name blur">Ammi</p>
-              <p class="preview blur">Call me when free</p>
-            </div>
-          </div>
-          <div class="chat-row">
-            <span class="avatar blur"></span>
-            <div>
-              <p class="name blur">Ali</p>
-              <p class="preview blur">See you outside</p>
-            </div>
-          </div>
+
+      <!-- Feature pills -->
+      <div class="pill-list">
+        <div class="pill">
+          <span>Message Blur</span>
+          <span class="pill-icon">↗</span>
         </div>
-        <div class="demo-chat">
-          <p class="bubble in blur">Can you share the updated file?</p>
-          <p class="bubble out blur">Sending now.</p>
-          <p class="bubble in blur">Perfect, thanks.</p>
+        <div class="pill active">
+          <span>Avatar &amp; Name Masking</span>
+          <span class="pill-icon" style="background:rgba(0,0,0,0.2);">↗</span>
+        </div>
+        <div class="pill">
+          <span>Media &amp; Preview Blur</span>
+          <span class="pill-icon">↗</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section reveal" id="features">
+  <!-- ── Demo preview ──────────────────────────────────────────── -->
+  <section class="demo reveal" id="demo" aria-label="Interactive demo preview">
+    <div class="demo-head">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <p>Live Preview — hover to reveal</p>
+    </div>
+    <div class="demo-grid">
+      <!-- Sidebar list -->
+      <div class="demo-list">
+        <div class="chat-row">
+          <span class="avatar blur" aria-hidden="true"></span>
+          <div>
+            <p class="name blur">Project Group</p>
+            <p class="preview blur">Deadline moved to 8 PM</p>
+          </div>
+        </div>
+        <div class="chat-row">
+          <span class="avatar blur" aria-hidden="true"></span>
+          <div>
+            <p class="name blur">Ammi</p>
+            <p class="preview blur">Call me when free</p>
+          </div>
+        </div>
+        <div class="chat-row">
+          <span class="avatar blur" aria-hidden="true"></span>
+          <div>
+            <p class="name blur">Ali</p>
+            <p class="preview blur">See you outside</p>
+          </div>
+        </div>
+      </div>
+      <!-- Chat window -->
+      <div class="demo-chat">
+        <p class="bubble in blur">Can you share the updated file?</p>
+        <p class="bubble out blur">Sending now, just a sec.</p>
+        <p class="bubble in blur">Perfect, thanks a lot!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ─────────────────────────────────────────────── -->
+  <section class="section reveal" id="features">
+    <div class="section-header">
       <p class="kicker">Core Features</p>
-      <h2>Blur Exactly What You Need</h2>
-      <div class="feature-grid">
-        <article class="card"><h3>Messages</h3><p>Incoming and outgoing message bubbles.</p></article>
-        <article class="card"><h3>Previews</h3><p>Sidebar timestamps and preview message text.</p></article>
-        <article class="card"><h3>Media</h3><p>Image and video thumbnails inside chat.</p></article>
-        <article class="card"><h3>Names</h3><p>Contact and group titles in list and header.</p></article>
-        <article class="card"><h3>Avatars</h3><p>Profile photos across list, headers, and group identity.</p></article>
-        <article class="card"><h3>Input</h3><p>Composer content with custom blur amount.</p></article>
-      </div>
-    </section>
+      <h2>Blur <span class="accent">Exactly</span> What You Need</h2>
+      <p class="section-sub">Six granular controls let you hide precisely the right content — toggle any combination from the popup.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="card" id="feat-messages">
+        <div class="card-icon"><span class="icon-glyph">MSG</span></div>
+        <h3>Messages</h3>
+        <p>Incoming and outgoing message bubbles blurred until you hover to read them.</p>
+      </article>
+      <article class="card" id="feat-previews">
+        <div class="card-icon"><span class="icon-glyph">PRV</span></div>
+        <h3>Previews</h3>
+        <p>Sidebar timestamps and last-message text hidden so shoulder-surfers see nothing.</p>
+      </article>
+      <article class="card" id="feat-media">
+        <div class="card-icon"><span class="icon-glyph">MED</span></div>
+        <h3>Media</h3>
+        <p>Image and video thumbnails inside chat are blurred until deliberately revealed.</p>
+      </article>
+      <article class="card" id="feat-names">
+        <div class="card-icon"><span class="icon-glyph">NAM</span></div>
+        <h3>Names</h3>
+        <p>Contact and group titles in the list, chat header, and reply panels stay hidden.</p>
+      </article>
+      <article class="card" id="feat-avatars">
+        <div class="card-icon"><span class="icon-glyph">AVT</span></div>
+        <h3>Avatars</h3>
+        <p>Profile photos across the list, headers, and group identity all covered.</p>
+      </article>
+      <article class="card" id="feat-input">
+        <div class="card-icon"><span class="icon-glyph">INP</span></div>
+        <h3>Input Field</h3>
+        <p>Composer text blurred while typing — customisable blur strength in the popup.</p>
+      </article>
+    </div>
+  </section>
 
-    <section class="section reveal" id="install">
+  <!-- ── Install ───────────────────────────────────────────────── -->
+  <section class="section reveal" id="install">
+    <div class="section-header">
       <p class="kicker">Install</p>
-      <h2>Set Up In One Minute</h2>
-      <ol class="steps">
-        <li>Download and unzip the project folder.</li>
-        <li>Open <code>chrome://extensions</code> and enable Developer mode.</li>
-        <li>Click Load unpacked and select this folder.</li>
-        <li>Open <a href="https://web.whatsapp.com" target="_blank" rel="noreferrer">web.whatsapp.com</a> and use the toolbar popup.</li>
-      </ol>
-    </section>
-
-    <section class="section reveal" id="details">
-      <p class="kicker">Privacy</p>
-      <h2>Local, Lightweight, No Tracking</h2>
-      <div class="details card">
-        <p>No analytics, no external API calls, and no message export.</p>
-        <p>Settings are saved in <code>chrome.storage.sync</code>.</p>
+      <h2>Set Up In <span class="accent">One Minute</span></h2>
+      <p class="section-sub">No Chrome Web Store required — load it directly from source in four quick steps.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card" id="step-1">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Download the extension</strong>
+          <p>Click Download ZIP above and save the archive anywhere on your machine.</p>
+        </div>
       </div>
-    </section>
+      <div class="step-card" id="step-2">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Unzip the folder</strong>
+          <p>Extract the contents so you have a plain folder with the extension files.</p>
+        </div>
+      </div>
+      <div class="step-card" id="step-3">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Load in Chrome</strong>
+          <p>Navigate to <code>chrome://extensions</code>, enable <strong>Developer mode</strong>, click <strong>Load unpacked</strong> and select the folder.</p>
+        </div>
+      </div>
+      <div class="step-card" id="step-4">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Open WhatsApp Web</strong>
+          <p>Go to <a href="https://web.whatsapp.com" target="_blank" rel="noreferrer" style="color:var(--green)">web.whatsapp.com</a> and click the extension icon in your toolbar to control blur settings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer class="foot">
-      <p>Built by Taha Jaffri · MIT License</p>
-    </footer>
+  <!-- ── Privacy ───────────────────────────────────────────────── -->
+  <section class="section reveal" id="privacy">
+    <div class="section-header">
+      <p class="kicker">Privacy First</p>
+      <h2>Local, Lightweight, <span class="accent">No Tracking</span></h2>
+      <p class="section-sub">Everything runs in your browser. Nothing ever leaves your machine.</p>
+    </div>
+    <div class="privacy-grid">
+      <div class="privacy-card" id="priv-analytics">
+        <div class="privacy-icon"><span class="icon-glyph">NO</span></div>
+        <div>
+          <h4>Zero Analytics</h4>
+          <p>No telemetry, no event tracking, no third-party SDKs. The extension doesn't know you exist.</p>
+        </div>
+      </div>
+      <div class="privacy-card" id="priv-network">
+        <div class="privacy-icon"><span class="icon-glyph">NET</span></div>
+        <div>
+          <h4>No External Calls</h4>
+          <p>The extension makes zero network requests beyond what WhatsApp Web itself needs.</p>
+        </div>
+      </div>
+      <div class="privacy-card" id="priv-storage">
+        <div class="privacy-icon"><span class="icon-glyph">SYN</span></div>
+        <div>
+          <h4>Local Settings</h4>
+          <p>Your toggle preferences are saved in <code>chrome.storage.sync</code> — synced to your Google account, never to our servers.</p>
+        </div>
+      </div>
+      <div class="privacy-card" id="priv-open">
+        <div class="privacy-icon"><span class="icon-glyph">OSS</span></div>
+        <div>
+          <h4>Fully Open Source</h4>
+          <p>Every line of code is public on GitHub. Audit it, fork it, contribute — MIT licensed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA Banner ─────────────────────────────────────────────── -->
+  <div class="cta-banner reveal" id="cta-section">
+    <h2>Start <span class="accent">Protecting</span> Your Screen Today</h2>
+    <p>Free, open-source, and takes under a minute to install. Browse WhatsApp Web with confidence.</p>
+    <div class="hero-actions">
+      <a id="cta-download-btn" class="btn btn-solid" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur/archive/refs/heads/main.zip">
+        Download ZIP <span class="arrow">→</span>
+      </a>
+      <a id="cta-github-btn" class="btn btn-ghost" href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank" rel="noreferrer">
+        View on GitHub
+      </a>
+    </div>
   </div>
 
-  <script>
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="foot">
+    <div class="foot-brand">
+      <div class="foot-dot"></div>
+      Privacy Blur
+    </div>
+    <p>Built by Taha Jaffri · MIT License</p>
+    <nav class="foot-links" aria-label="Footer navigation">
+      <a href="https://github.com/SyeddTaha/whatsapp-web-privacy-blur" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+    </nav>
+  </footer>
+
+</div>
+
+<script>
+  /* Scroll-reveal */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -121,9 +279,15 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
 
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-  </script>
+
+  /* Staggered card animations */
+  const cards = document.querySelectorAll('.card, .step-card, .privacy-card');
+  cards.forEach((card, i) => {
+    card.style.transitionDelay = `${i * 60}ms`;
+  });
+</script>
 </body>
 </html>
