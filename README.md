@@ -1,16 +1,21 @@
 # WhatsApp Privacy Blur
 
-A Chrome extension that blurs WhatsApp Web for shoulder-surfing privacy.
+A Chrome extension that blurs WhatsApp Web for shoulder-surfing privacy. Browse in public, in meetings, or anywhere someone might see your screen — your messages stay hidden until you choose to read them.
 
-- Fine-grained blur categories
-- Adjustable blur amount slider
-- Fast reveal modes
-- Local-only behavior (no analytics, no data export)
+- **Fine-grained blur controls** — toggle 6 individual categories independently
+- **Adjustable blur strength** — slider from 0 to 20px
+- **Fast reveal modes** — per-item hover or full-app reveal
+- **Fully local** — no analytics, no network requests, no data export
 
-Built for the person who shares their screen in meetings, works in public, or just doesn't want their chat history visible to whoever walks past.
+[![Landing Page](docs/screenshot-website.png)](https://syeddtaha.github.io/whatsapp-web-privacy-blur/)
 
-[<img width="1891" height="897" alt="image" src="https://github.com/user-attachments/assets/8c9681fd-ff09-4537-8c25-b1ea16de382d" />
-](https://syeddtaha.github.io/whatsapp-web-privacy-blur/)
+---
+
+## Popup
+
+<img src="docs/screenshot-popup.png" alt="Privacy Blur popup" width="300" />
+
+The popup provides a compact settings panel with a master enable/disable toggle, per-category blur toggles, a blur strength slider, and reveal behaviour options. Settings are saved to `chrome.storage.sync` and applied immediately to any open WhatsApp tab.
 
 ---
 
@@ -41,38 +46,38 @@ Avatars in list rows, chat headers, and group/community identity areas. Runtime 
 
 ## Blur Amount Slider
 
-You can control blur intensity from the popup (`0` to `20`).
+Control blur intensity from the popup (`0` to `20`).
 
 - `0` = effectively no blur
-- higher values = stronger blur
-- input blur uses a lighter derived value so the composer remains usable
+- Higher values = stronger blur
+- Input blur uses a lighter derived value so the composer remains usable
 
 ---
 
-## Reveal behaviour
+## Reveal Behaviour
 
 ### Per-item hover (default)
-Move your mouse over any blurred element to reveal it. Move away and it blurs again. Everything else on the page stays blurred. This is the default mode.
+Move your mouse over any blurred element to reveal it. Move away and it blurs again. Everything else on the page stays blurred.
 
 ### Instant Reveal
-By default the blur fades in and out over 180ms. Turn on Instant Reveal to remove the transition entirely — the unblur is immediate on hover, which feels snappier if the animation bothers you.
+By default the blur fades in and out over 180ms. Turn on **Instant Reveal** to remove the transition entirely — the unblur is immediate on hover.
 
 ### Hover App to Reveal All
-When this is on, moving your mouse anywhere over the WhatsApp Web tab unblurs everything at once. Useful when you want to read normally for a bit without hovering item by item. Move your mouse off the browser window and everything blurs again.
+When on, moving your mouse anywhere over the WhatsApp Web tab unblurs everything at once. Useful when you want to read normally for a stretch without hovering item by item. Move the mouse off the browser window and everything blurs again.
 
 ---
 
-## The popup
+## Installation
 
-The popup is a compact modern black/white panel with:
+1. [Download the ZIP](https://github.com/SyeddTaha/whatsapp-web-privacy-blur/archive/refs/heads/main.zip) and unzip it
+2. Go to `chrome://extensions/`
+3. Enable **Developer mode** (toggle in the top right)
+4. Click **Load unpacked** and select the unzipped folder
+5. Open [web.whatsapp.com](https://web.whatsapp.com)
 
-- Master enable/disable toggle
-- Blur Targets section (per-category toggles)
-- Blur Strength section (slider)
-- Reveal Behaviour section
-- Live status line
+Works on Chrome, Edge, Brave, and any Chromium-based browser that supports Manifest V3.
 
-Settings are saved to `chrome.storage.sync` and applied immediately to active WhatsApp tabs.
+> **Updating from a previous version:** remove the old extension first, then load the new folder. Chrome caches content scripts aggressively and a reload alone sometimes isn't enough.
 
 ---
 
@@ -80,27 +85,13 @@ Settings are saved to `chrome.storage.sync` and applied immediately to active Wh
 
 The extension injects one `<style>` tag into WhatsApp Web and rebuilds it whenever settings change. No per-element inline style mutation.
 
-**Message blur specifically:** Early versions tried to blur inner `<span>` text nodes. That doesn't work. WhatsApp's parent divs use `overflow: hidden`, which clips the blur glow at the container edge, making it look like nothing happened. The fix is blurring the entire `.message-in` / `.message-out` row elements. Those class names aren't obfuscated — WhatsApp has kept them stable and they're used by every WA automation library.
+**Message blur:** Early versions tried to blur inner `<span>` text nodes. That doesn't work — WhatsApp's parent divs use `overflow: hidden`, which clips the blur glow at the container edge. The fix is blurring the entire `.message-in` / `.message-out` row elements. Those class names aren't obfuscated and have remained stable.
 
 **Avatar blur:** A debounced `MutationObserver` scans candidate images, excludes message/reaction/quoted containers, and tags avatar-like images with `.wpb-av` for CSS targeting.
 
 **Style self-healing:** A second `MutationObserver` watches `<head>`. If WhatsApp's own rendering removes the injected style tag, it gets re-injected immediately.
 
 **Selectors used:** Stable `data-testid` selectors where available, `.message-in` / `.message-out` for message rows, and selective structural fallbacks.
-
----
-
-## Installation
-
-1. Download the ZIP and unzip it
-2. Go to `chrome://extensions/`
-3. Enable **Developer mode** (toggle in the top right)
-4. Click **Load unpacked** and select the `whatsapp-privacy-blur/` folder
-5. Open [web.whatsapp.com](https://web.whatsapp.com)
-
-Works on Chrome, Edge, Brave, and any Chromium-based browser that supports Manifest V3.
-
-> If you're updating from a previous version: remove the old extension first, then load the new folder. Chrome caches content scripts aggressively and a reload alone sometimes isn't enough.
 
 ---
 
@@ -112,10 +103,13 @@ whatsapp-privacy-blur/
 ├── content.js          CSS builder + MutationObserver + avatar scanner
 ├── blur.css            Minimal base content CSS
 ├── popup.html          Popup UI markup
-├── popup.css           Popup styles (modern minimal monochrome)
+├── popup.css           Popup styles (dark / neon-green theme)
 ├── popup.js            Settings persistence via chrome.storage.sync
 ├── index.html          Project landing page
 ├── style.css           Landing page styles
+├── docs/
+│   ├── screenshot-website.png
+│   └── screenshot-popup.png
 └── icons/
     ├── icon16.png
     ├── icon48.png
@@ -129,3 +123,5 @@ whatsapp-privacy-blur/
 No data collection. No network requests from the extension. No analytics. All settings live in `chrome.storage.sync`, which is local to your browser (and optionally synced by Chrome across your own signed-in devices). The extension never reads message content — it only applies CSS filters to DOM elements.
 
 ---
+
+Built by Taha Jaffri · MIT License
