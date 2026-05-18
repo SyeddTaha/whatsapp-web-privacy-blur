@@ -53,7 +53,7 @@ masterToggle.addEventListener('change', () => {
   const enabled = masterToggle.checked;
   setDisabledState(!enabled);
   save({ enabled });
-  updateStatusFromStorage();
+  updateStatusFromUI();
 });
 
 if (blurAmountInput && blurAmountValue) {
@@ -72,7 +72,7 @@ rows.forEach(row => {
 
   input.addEventListener('change', () => {
     save({ [key]: input.checked });
-    updateStatusFromStorage();
+    updateStatusFromUI();
   });
 });
 
@@ -91,6 +91,19 @@ function setDisabledState(disabled) {
   }
 }
 
+function getUIState() {
+  const state = {};
+  rows.forEach(row => {
+    const key = row.dataset.key;
+    const input = row.querySelector('input[type="checkbox"]');
+    if (input && key) {
+      state[key] = input.checked;
+    }
+  });
+  state.enabled = masterToggle.checked;
+  return state;
+}
+
 function updateStatus(s) {
   if (!s.enabled) {
     statusLine.textContent = 'Blur is OFF — everything visible';
@@ -99,10 +112,19 @@ function updateStatus(s) {
   const active = Object.entries(s)
     .filter(([k, v]) => v && k.startsWith('blur'))
     .length;
-  const hover = s.revealOnAppHover ? 'hover app to reveal all' : 'hover item to reveal';
-  statusLine.textContent = `${active} blur${active !== 1 ? 's' : ''} active · ${hover}`;
+  const isHoverAppEnabled = s.revealOnAppHover === true;
+  const hover = isHoverAppEnabled ? 'hover app to reveal all' : 'hover item to reveal';
+  statusLine.textContent = `${active} active · ${hover}`;
+}
+
+function updateStatusFromUI() {
+  const uiState = getUIState();
+  updateStatus(uiState);
 }
 
 function updateStatusFromStorage() {
-  chrome.storage.sync.get(DEFAULTS, (s) => updateStatus({ ...DEFAULTS, ...s }));
+  chrome.storage.sync.get(DEFAULTS, (stored) => {
+    const s = { ...DEFAULTS, ...stored };
+    updateStatus(s);
+  });
 }
