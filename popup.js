@@ -110,7 +110,7 @@ function updateStatus(s) {
     return;
   }
   const active = Object.entries(s)
-    .filter(([k, v]) => v && k.startsWith('blur'))
+    .filter(([k, v]) => k.startsWith('blur') && typeof v === 'boolean' && v === true)
     .length;
   const isHoverAppEnabled = s.revealOnAppHover === true;
   const hover = isHoverAppEnabled ? 'hover app to reveal all' : 'hover item to reveal';
