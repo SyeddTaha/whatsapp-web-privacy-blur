@@ -592,6 +592,17 @@ h2 .accent { color: var(--green); }
   border-radius: 6px;
   background: var(--green);
   box-shadow: 0 0 10px var(--green-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+.foot-dot::after {
+  content: '🔒';
+  font-size: 10px;
+  line-height: 1;
+  filter: brightness(0);
 }
 .foot-links { display: flex; gap: 20px; }
 .foot-links a:hover { color: var(--text); }
